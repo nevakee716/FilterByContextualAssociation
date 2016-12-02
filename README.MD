@@ -25,11 +25,16 @@ We want to display the following list :
 - country
 	- organisation
 		- sites
-If we use the classic list, we would obtain this :
-| ![](https://github.com/nevakee716/FilterByContextualAssociation/blob/master/screen/1.png) | Here we can see a problem, cause S&E Europe contains cities from Belgium and France, so we have french cities under Belgium |
+If we use the classic list, we would obtain this
+
+![](https://github.com/nevakee716/FilterByContextualAssociation/blob/master/screen/1.png) 
+
+Here we can see a problem, cause S&E Europe contains cities from Belgium and France, so we have french cities under Belgium 
+
 To solve this situation, we need to use the layout filter by contextual Association, like this : 
 ![](https://github.com/nevakee716/FilterByContextualAssociation/blob/master/screen/3.png)
 and here is the result
+
 ![](https://github.com/nevakee716/FilterByContextualAssociation/blob/master/screen/2.png)
 
 ### Exemple 2

@@ -17,9 +17,9 @@
     cwFilterByContextualAssociation.prototype.drawOneMethod = function(output, child) {
         this.findFilterNode(child,child,null);
         if(cwApi.cwLayouts[this.replaceLayout].drawOneMethod) {
-            cwApi.cwLayouts[this.replaceLayout].drawOneMethod.call(this, output, child); 
+            cwApi.cwLayouts[this.replaceLayout].drawOneMethod.call(this, output, child);
         } else if(cwApi.cwLayouts[this.replaceLayout].drawOne) {
-            cwApi.cwLayouts[this.replaceLayout].drawOne.call(this, output, child); 
+            cwApi.cwLayouts[this.replaceLayout].drawOne.call(this, output, child);
         }
     };
 
@@ -29,9 +29,9 @@
             if (child.associations.hasOwnProperty(associationNode)) {
                 var nodeToDelete = [];
                 for (var i = 0; i < child.associations[associationNode].length; i += 1) {
-                    if(associationNode == this.trueNodeID && child.associations[associationNode][i].name == topfather.name) {
+                    if(associationNode === this.trueNodeID && child.associations[associationNode][i].name === topfather.name) {
                         return true;
-                    } else if(associationNode == this.falseNodeID && child.associations[associationNode][i].name == topfather.name) {
+                    } else if(associationNode === this.falseNodeID && child.associations[associationNode][i].name === topfather.name) {
                         return false;
                     } else {
                         nextChild = child.associations[associationNode][i];
@@ -40,12 +40,12 @@
                         }
                     }
                 }
-                if(associationNode == this.trueNodeID) {
+                if(associationNode === this.trueNodeID) {
                     return false;
                 }
-                if(associationNode == this.falseNodeID) {
+                if(associationNode === this.falseNodeID) {
                     return true;
-                }  
+                }
                 for (var i = nodeToDelete.length-1; i >= 0; i -= 1) {
                     delete child.associations[associationNode].splice(nodeToDelete[i], 1);
                 }
