@@ -7,8 +7,10 @@
     var cwFilterByContextualAssociation = function(options, viewSchema) {
 
         cwApi.extend(this, cwApi.cwLayouts.CwLayout, options, viewSchema);
-        this.trueNodeID = this.options.CustomOptions['filter-in'];
-        this.falseNodeID = this.options.CustomOptions['filter-out'];
+        this.trueNodesID = {};
+        this.falseNodesID = {};
+        this.createObjectNodes(true,this.options.CustomOptions['filter-in']);
+        this.createObjectNodes(false,this.options.CustomOptions['filter-out']);
         this.replaceLayout = this.options.CustomOptions['replace-layout'];
         cwApi.extend(this, cwApi.cwLayouts[this.replaceLayout], options, viewSchema);
         cwApi.registerLayoutForJSActions(this);
@@ -23,15 +25,28 @@
         }
     };
 
+    cwFilterByContextualAssociation.prototype.createObjectNodes = function(nodeType,customOptions) {
+        var nodes = customOptions.split(";");
+        for (var i = 0; i < nodes.length; i += 1) {
+            if(nodeType === true) {
+                this.trueNodesID[nodes[i]] = nodes[i];
+            } else if(nodeType === false){
+                this.falseNodesID[nodes[i]] = nodes[i];
+            }
+        }
+    };
+
+
     cwFilterByContextualAssociation.prototype.findFilterNode = function(child,topfather) {
         var nextChild = null;
+
         for (var associationNode in child.associations) {
             if (child.associations.hasOwnProperty(associationNode)) {
                 var nodeToDelete = [];
                 for (var i = 0; i < child.associations[associationNode].length; i += 1) {
-                    if(associationNode === this.trueNodeID && child.associations[associationNode][i].name === topfather.name) {
+                    if(this.trueNodesID.hasOwnProperty(associationNode) && child.associations[associationNode][i].name === topfather.name) {
                         return true;
-                    } else if(associationNode === this.falseNodeID && child.associations[associationNode][i].name === topfather.name) {
+                    } else if(this.falseNodesID.hasOwnProperty(associationNode) && child.associations[associationNode][i].name === topfather.name) {
                         return false;
                     } else {
                         nextChild = child.associations[associationNode][i];
@@ -40,10 +55,10 @@
                         }
                     }
                 }
-                if(associationNode === this.trueNodeID) {
+                if(this.trueNodesID.hasOwnProperty(associationNode)) {
                     return false;
                 }
-                if(associationNode === this.falseNodeID) {
+                if(this.falseNodesID.hasOwnProperty(associationNode)) {
                     return true;
                 }
                 for (var i = nodeToDelete.length-1; i >= 0; i -= 1) {
