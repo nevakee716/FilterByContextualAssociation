@@ -1,7 +1,7 @@
 {
   "name": "FilterByContextualAssociation",
   "description": "Allow you to filter items on a node depending on a Contextual association with the first parent",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "cwFilterByContextualAssociation.js",
   "scripts": {
     "test": ""
