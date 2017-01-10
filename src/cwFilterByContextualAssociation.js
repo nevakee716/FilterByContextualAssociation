@@ -39,11 +39,13 @@
 
     cwFilterByContextualAssociation.prototype.findFilterNode = function(child,topfather) {
         var nextChild = null;
+        var i;
+        var nodeToDelete;
 
         for (var associationNode in child.associations) {
             if (child.associations.hasOwnProperty(associationNode)) {
-                var nodeToDelete = [];
-                for (var i = 0; i < child.associations[associationNode].length; i += 1) {
+                nodeToDelete = [];
+                for (i = 0; i < child.associations[associationNode].length; i += 1) {
                     if(this.trueNodesID.hasOwnProperty(associationNode) && child.associations[associationNode][i].name === topfather.name) {
                         return true;
                     } else if(this.falseNodesID.hasOwnProperty(associationNode) && child.associations[associationNode][i].name === topfather.name) {
@@ -61,8 +63,35 @@
                 if(this.falseNodesID.hasOwnProperty(associationNode)) {
                     return true;
                 }
-                for (var i = nodeToDelete.length-1; i >= 0; i -= 1) {
+                for (i = nodeToDelete.length-1; i >= 0; i -= 1) {
                     delete child.associations[associationNode].splice(nodeToDelete[i], 1);
+                }
+            }
+        }
+
+        for (var iAssociationNode in child.iAssociations) {
+            if (child.iAssociations.hasOwnProperty(iAssociationNode)) {
+                nodeToDelete = [];
+                for (i = 0; i < child.iAssociations[iAssociationNode].length; i += 1) {
+                    if(this.trueNodesID.hasOwnProperty(iAssociationNode) && child.iAssociations[iAssociationNode][i].name === topfather.name) {
+                        return true;
+                    } else if(this.falseNodesID.hasOwnProperty(iAssociationNode) && child.iAssociations[iAssociationNode][i].name === topfather.name) {
+                        return false;
+                    } else {
+                        nextChild = child.iAssociations[iAssociationNode][i];
+                        if(!this.findFilterNode(nextChild,topfather)) {
+                            nodeToDelete.push(i);
+                        }
+                    }
+                }
+                if(this.trueNodesID.hasOwnProperty(iAssociationNode)) {
+                    return false;
+                }
+                if(this.falseNodesID.hasOwnProperty(iAssociationNode)) {
+                    return true;
+                }
+                for (i = nodeToDelete.length-1; i >= 0; i -= 1) {
+                    delete child.iAssociations[iAssociationNode].splice(nodeToDelete[i], 1);
                 }
             }
         }

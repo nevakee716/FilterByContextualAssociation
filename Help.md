@@ -11,7 +11,9 @@ https://github.com/casewise/cpm/wiki
 ## Parameter setup 
 
 DisplayName : Set the layout javascript class name you want to use to display this node
+
 Filter In : Set the id of the node which should be display if the Contextual association exist
+
 Filter Out : Set the id of the node which should be display if the Contextual association not exist
 
 ## How to set association filter
