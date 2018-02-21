@@ -19,7 +19,6 @@
 
     cwFilterByContextualAssociation.prototype.drawOneMethod = function(output, child) {
     	if(this.topObject) {
-    		debugger;
     		this.findFilterNode(child,this.item,null);
     	} else {
     		this.findFilterNode(child,child,null);
