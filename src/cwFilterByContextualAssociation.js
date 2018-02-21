@@ -12,12 +12,19 @@
         this.createObjectNodes(true,this.options.CustomOptions['filter-in']);
         this.createObjectNodes(false,this.options.CustomOptions['filter-out']);
         this.replaceLayout = this.options.CustomOptions['replace-layout'];
+        this.topObject = this.options.CustomOptions['top-object'];
         cwApi.extend(this, cwApi.cwLayouts[this.replaceLayout], options, viewSchema);
         cwApi.registerLayoutForJSActions(this);
     };
 
     cwFilterByContextualAssociation.prototype.drawOneMethod = function(output, child) {
-        this.findFilterNode(child,child,null);
+    	if(this.topObject) {
+    		debugger;
+    		this.findFilterNode(child,this.item,null);
+    	} else {
+    		this.findFilterNode(child,child,null);
+    	}
+        
         if(cwApi.cwLayouts[this.replaceLayout].drawOneMethod) {
             cwApi.cwLayouts[this.replaceLayout].drawOneMethod.call(this, output, child);
         } else if(cwApi.cwLayouts[this.replaceLayout].drawOne) {
