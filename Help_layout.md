@@ -1,6 +1,6 @@
-| **Name** |  **Status** | Stable | Work but need more test | Nightly | **Updated by** |
-| --- | --- | --- | --- | --- | --- |
-| **Filter By Contextual Association** | **Version** | 1.2 | 2.0 | 2.x | Mathias PFAUWADEL |
+| **Name** |  Version | **Updated by** |
+| --- | --- | --- |
+| **Filter By Contextual Association** | 2.1 | Mathias PFAUWADEL |
 
 
 ## Description 
